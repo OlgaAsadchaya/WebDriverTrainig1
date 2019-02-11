@@ -9,8 +9,8 @@ import shop.RealItem;
 import static org.junit.jupiter.api.Assertions.*;
 
 class JsonParserTest {
-    String testCartName = "anna-cart";
-    String testCartFileName = "./src/main/resources/" + this.testCartName + ".json";
+    final String testCartName = "anna-cart";
+    final String testCartFileName = "./src/main/resources/" + this.testCartName + ".json";
     Cart testCart;
 
 
@@ -45,6 +45,7 @@ class JsonParserTest {
         assertTrue(f.exists());
     }
 
+    @Disabled
     @org.junit.jupiter.api.Test
     void readFromFile() {
         Parser parser = new JsonParser();
@@ -54,13 +55,14 @@ class JsonParserTest {
         assertEquals(checkedCart.getCartName(), testCart.getCartName());
         assertEquals(checkedCart.getTotalPrice(), testCart.getTotalPrice());
     }
-    @Disabled
-    @org.junit.jupiter.api.Test
-    void readFromFileException() {
+    @org.junit.jupiter.params.ParameterizedTest
+    @org.junit.jupiter.params.provider.ValueSource(strings = { "wwwwww", "ccccc",
+            "xxxxx", "444444", "vvvvvvvvvvvv"})
+    void readFromFileException(String fileName) {
         Parser parser = new JsonParser();
         assertThrows(NoSuchFileException.class,
                 () -> {
-                    Cart checkedCart = parser.readFromFile(new File("wwwwww"));
+                    Cart checkedCart = parser.readFromFile(new File(fileName));
                 }
         );
     }
