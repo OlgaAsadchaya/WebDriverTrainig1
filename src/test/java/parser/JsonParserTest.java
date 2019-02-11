@@ -56,8 +56,8 @@ class JsonParserTest {
         assertEquals(checkedCart.getTotalPrice(), testCart.getTotalPrice());
     }
     @org.junit.jupiter.params.ParameterizedTest
-    @org.junit.jupiter.params.provider.ValueSource(strings = { "wwwwww", "ccccc",
-            "xxxxx", "444444", "vvvvvvvvvvvv"})
+    @org.junit.jupiter.params.provider.ValueSource(strings = { "test", "12345",
+            "@#$%^", "    ", "test@test.com"})
     void readFromFileException(String fileName) {
         Parser parser = new JsonParser();
         assertThrows(NoSuchFileException.class,
