@@ -6,7 +6,14 @@ import org.junit.jupiter.api.Disabled;
 import shop.Cart;
 import shop.RealItem;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class JsonParserTest {
     final String testCartName = "anna-cart";
@@ -14,7 +21,7 @@ class JsonParserTest {
     Cart testCart;
 
 
-    @org.junit.jupiter.api.BeforeEach
+    @BeforeEach
     void setUp() {
         testCart = new Cart(testCartName);
 
@@ -26,27 +33,26 @@ class JsonParserTest {
         testCart.addRealItem(bag);
     }
 
-    @org.junit.jupiter.api.AfterEach
+    @AfterEach
     void tearDown() {
         File f = new File(testCartFileName);
-        if (f.exists())
-        {
+        if (f.exists()) {
             f.delete();
         }
         testCart = null;
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void writeToFile() {
         Parser parser = new JsonParser();
         parser.writeToFile(testCart);
 
         File f = new File(testCartFileName);
-        assertTrue(f.exists());
+        assertTrue(f.exists(), "file %s doesn't exists".format(testCartFileName));
     }
 
     @Disabled
-    @org.junit.jupiter.api.Test
+    @Test
     void readFromFile() {
         Parser parser = new JsonParser();
         parser.writeToFile(testCart);
@@ -55,8 +61,8 @@ class JsonParserTest {
         assertEquals(checkedCart.getCartName(), testCart.getCartName());
         assertEquals(checkedCart.getTotalPrice(), testCart.getTotalPrice());
     }
-    @org.junit.jupiter.params.ParameterizedTest
-    @org.junit.jupiter.params.provider.ValueSource(strings = { "test", "12345",
+    @ParameterizedTest
+    @ValueSource(strings = { "test", "12345",
             "@#$%^", "    ", "test@test.com"})
     void readFromFileException(String fileName) {
         Parser parser = new JsonParser();

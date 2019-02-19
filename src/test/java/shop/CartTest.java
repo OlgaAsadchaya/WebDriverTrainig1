@@ -4,9 +4,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import javax.smartcardio.Card;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CartTest {
 
@@ -26,8 +25,6 @@ class CartTest {
 
     @Test
     void getCartName() {
-
         assertEquals(cart.getCartName(), cartName);
-
     }
 }
