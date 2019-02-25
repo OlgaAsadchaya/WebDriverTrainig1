@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true" name="./src/test/java">
+        <classes>
+            <class name="parser.JsonParserTest">
+                <methods>
+                    <include name="writeToFile"/>
+                    <include name="readFromFile"/>
+                </methods>
+            </class>
+            <class name="parser.JsonParserTestNG">
+                <methods>
+                    <include name="testWriteToFile"/>
+                    <include name="testReadFromFile"/>
+                    <include name="readFromFileException"/>
+                </methods>
+            </class>
+            <class name="shop.CartTest">
+                <methods>
+                    <include name="getCartName"/>
+                </methods>
+            </class>
+            <class name="shop.CartTestNG">
+                <methods>
+                    <include name="testGetCartName"/>
+                </methods>
+            </class>
+            <class name="shop.RealItemTest">
+                <methods>
+                    <include name="toStr"/>
+                </methods>
+            </class>
+            <class name="shop.RealItemTestNG">
+                <methods>
+                    <include name="testToString"/>
+                </methods>
+            </class>
+            <class name="shop.VirtualItemTest">
+                <methods>
+                    <include name="toStr"/>
+                </methods>
+            </class>
+            <class name="shop.VirtualItemTestNG">
+                <methods>
+                    <include name="testToString"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
